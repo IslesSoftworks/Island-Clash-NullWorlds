@@ -1,0 +1,9 @@
+name: NullWorlds
+main: io.isles.ic.nullworlds.NullWorlds
+author: Isles Softworks LTD
+version: 0.1.0
+website: www.isles-softworks.com
+load: startup
+worlds:
+  Island:
+    generator: NullWorlds:NullChunkGenerator

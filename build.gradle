@@ -1,0 +1,34 @@
+apply from: '../gradle-super/artifactory-deploy.gradle'
+apply from: '../bukkit-gradle/minecraft.gradle'
+
+version = '0.1.0'
+
+javadoc {
+    failOnError false
+}
+
+artifacts {
+    archives fatJar
+}
+
+fatJar {
+    classifier 'fat'
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '2+'
+        classpath group: 'eu.appsatori', name: 'gradle-fatjar-plugin', version: '0.+'
+    }
+}
+
+dependencies {
+    compile group: 'io.isles', name: 'island-clash-core', version: '1.8.0-develop', transitive: false, classifier: 'fat', { ext { fatJarExclude = true } }
+    testCompile group: 'isles.io', name: 'island-clash-core', version: '+', classifier: 'javadoc'
+    testCompile group: 'isles.io', name: 'island-clash-core', version: '+', classifier: 'sources'
+}
